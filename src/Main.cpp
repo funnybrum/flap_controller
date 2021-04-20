@@ -12,15 +12,11 @@ Flap flap2 = Flap(&settings.getSettings()->flap2Settings, D5, 2);
 void setup()
 { 
     Serial.begin(74880);
-    while (! Serial) {
-        delay(1);
-    }
-    delay(1000);
     settings.begin();
-    wifi.begin();
-    webServer.begin();
     flap1.begin();
     flap2.begin();
+    wifi.begin();
+    webServer.begin();
 
     wifi.connect();
 }
@@ -32,5 +28,5 @@ void loop() {
     flap1.loop();
     flap2.loop();
 
-    delay(30);
+    delay(25);
 }

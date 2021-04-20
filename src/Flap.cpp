@@ -16,19 +16,21 @@ void Flap::begin() {
 void Flap::loop() {
     bool change = false;
     if (_duty > _targetDuty) {
-        _duty -= 2;
-        _duty = max(_duty, _targetDuty);
+        _duty--;
         change = true;
     } else if (_duty < _targetDuty) {
-        _duty += 2;
-        _duty = min(_duty, _targetDuty);
+        _duty++;
         change = true;
     }
 
     if (change) {
         _servo->attach(_pin, 450, 2600, _duty);
     } else {
-        _servo->detach();
+        if (_countdown > 0) {
+            _countdown--;
+        } else {
+            _servo->detach();
+        }
     }
 }
 

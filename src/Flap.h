@@ -41,5 +41,5 @@ class Flap {
         uint16_t _targetDuty;
         FlapSettings* _settings;
         Servo* _servo;
-        uint16_t _td = 9;
+        uint16_t _countdown = 100;
 };
