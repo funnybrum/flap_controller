@@ -1,3 +1,5 @@
+#include "Main.h"
+
 const char CONFIG_PAGE[] PROGMEM = R"=====(
 <HTML>
  <HEAD>
@@ -19,3 +21,9 @@ const char CONFIG_PAGE[] PROGMEM = R"=====(
  </BODY>
 </HTML>
 )=====";
+
+const char GET_JSON[] PROGMEM = R"=====({
+ "fan":%d,
+ "flap1":%d,
+ "flap2":%d
+})=====";

@@ -12,6 +12,7 @@
 #include "esp8266-base.h"
 
 #include "Flap.h"
+#include "Fan.h"
 #include "DataCollector.h"
 
 #define HTTP_PORT 80
@@ -22,4 +23,5 @@ extern Settings settings;
 extern WiFiManager wifi;
 extern Flap flap1;
 extern Flap flap2;
+extern Fan fan;
 extern DataCollector dataCollector;

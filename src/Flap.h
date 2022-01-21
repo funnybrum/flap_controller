@@ -30,6 +30,9 @@ class Flap {
         void setFlow(uint8_t flow);
         void get_config_page(char* buffer);
         void parse_config_params(WebServerBase* webServer);
+        uint8_t getFlow();
+
+        void setDuty(uint16_t);
 
 
     private:
@@ -42,4 +45,5 @@ class Flap {
         FlapSettings* _settings;
         Servo* _servo;
         uint16_t _countdown = 100;
+        uint8_t _flow;
 };

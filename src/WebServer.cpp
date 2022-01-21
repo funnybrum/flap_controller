@@ -11,6 +11,12 @@ void WebServer::registerHandlers() {
     server->on("/settings", std::bind(&WebServer::handle_settings, this));
     server->on("/flap1", std::bind(&WebServer::handle_flap1, this));
     server->on("/flap2", std::bind(&WebServer::handle_flap2, this));
+    server->on("/get", std::bind(&WebServer::handle_get, this));
+
+    server->on("/fan/on", std::bind(&WebServer::handle_fan_on, this));
+    server->on("/fan/off", std::bind(&WebServer::handle_fan_off, this));
+    server->on("/fan/low", std::bind(&WebServer::handle_fan_lowPower, this));
+    server->on("/fan/high", std::bind(&WebServer::handle_fan_highPower, this));
 }
 
 void WebServer::handle_root() {
@@ -63,10 +69,41 @@ void WebServer::flapCommon(Flap* flap) {
 
     int16_t flow = atoi(server->argName(0).c_str());
     if (flow < 0 || flow > 100) {
-        server->send(400, "text/plain", "try with /flapX?{0-100}");
+        flap->setDuty(flow);
+        server->send(200);
+        // server->send(400, "text/plain", "try with /flapX?{0-100}");
         return;
     }
     
     flap->setFlow(flow);
     server->send(200);
+}
+
+void WebServer::handle_fan_on() {
+    fan.on();
+    server->send(200);
+}
+
+void WebServer::handle_fan_off() {
+    fan.off();
+    server->send(200);
+}
+
+void WebServer::handle_fan_lowPower() {
+    fan.lowPower();
+    server->send(200);
+}
+
+void WebServer::handle_fan_highPower() {
+    fan.highPower();
+    server->send(200);
+}
+
+void WebServer::handle_get() {
+    sprintf_P(buffer,
+              GET_JSON,
+              fan.getMode(),
+              flap1.getFlow(),
+              flap2.getFlow());
+    server->send(200, "application/json", buffer);
 }

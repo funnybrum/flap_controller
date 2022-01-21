@@ -9,8 +9,9 @@ Flap::Flap(FlapSettings* settings, uint8_t pin, uint8_t index) {
 
 void Flap::begin() {
     _servo = new Servo();
-    _servo->attach(_pin, 450, 2600, _settings->openUs);
+    _servo->attach(_pin, 250, 3000, _settings->openUs);
     _duty = _targetDuty = _settings->openUs;
+    _flow = 100;
 }
 
 void Flap::loop() {
@@ -55,6 +56,15 @@ uint16_t Flap::flowToServoDutyCycle(uint16_t flow) {
 
 void Flap::setFlow(uint8_t flow) {
     _targetDuty = flowToServoDutyCycle(flow * 10);
+    _flow = flow;
+}
+
+void Flap::setDuty(uint16_t duty) {
+    _servo->writeMicroseconds(duty);
+}
+
+uint8_t Flap::getFlow() {
+    return _flow;
 }
 
 void Flap::get_config_page(char* buffer) {
