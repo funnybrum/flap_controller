@@ -15,5 +15,9 @@ class WebServer: public WebServerBase {
         void handle_blink();
         void handle_flap1();
         void handle_flap2();
+        void handle_fan_on();
+        void handle_fan_off();
+        void handle_fan_lowPower();
+        void handle_fan_highPower();
         void flapCommon(Flap* flap);
 };
