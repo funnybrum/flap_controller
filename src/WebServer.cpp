@@ -20,11 +20,15 @@ void WebServer::handle_root() {
 
 void WebServer::handle_settings() {
     wifi.parse_config_params(this);
+    dataCollector.parse_config_params(this);
     flap1.parse_config_params(this);
     flap2.parse_config_params(this);
 
     char network_settings[strlen_P(NETWORK_CONFIG_PAGE) + 32];
     wifi.get_config_page(network_settings);
+    
+    char data_collector_settings[strlen_P(INFLUXDB_CONFIG_PAGE) + 64];
+    dataCollector.get_config_page(data_collector_settings);
 
     char flap1_settings[strlen_P(FLAP_CONFIG_PAGE) + 32];
     flap1.get_config_page(flap1_settings);
@@ -36,6 +40,7 @@ void WebServer::handle_settings() {
         buffer,
         CONFIG_PAGE,
         network_settings,
+        data_collector_settings,
         flap1_settings,
         flap2_settings);
     server->send(200, "text/html", buffer);

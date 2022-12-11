@@ -35,9 +35,9 @@ void Flap::loop() {
 }
 
 // 0 - valve is closed, servo is at closeUs
-// 100 - valve is open, servo is at openUs
+// 1000 - valve is open, servo is at openUs
 uint16_t Flap::flowToServoDutyCycle(uint16_t flow) {
-    // Calculate the flap degrees. 100 flow is valve open (low US), 0 flow is valve closed (high us)
+    // Calculate the flap degrees. 1000 flow is valve open (low US), 0 flow is valve closed (high us)
     // So we want for 1000 input flow to get 0 and for 0 input flow to get PI/2.
     double rad = acos((1000-flow) / 1000.0);
 

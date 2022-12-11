@@ -7,7 +7,8 @@ Settings::Settings()
 
 void Settings::initializeSettings() {
     strcpy(settingsData.network.hostname, HOSTNAME);
-        settingsData.flap1Settings.closeUs = 2300;
+
+    settingsData.flap1Settings.closeUs = 2300;
     settingsData.flap1Settings.openUs = 550;
     settingsData.flap2Settings.closeUs = 2300;
     settingsData.flap2Settings.openUs = 550;

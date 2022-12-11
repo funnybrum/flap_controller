@@ -3,9 +3,11 @@
 #include "SettingsBase.h"
 #include "WiFi.h"
 #include "Flap.h"
+#include "InfluxDBCollector.h"
 
 struct SettingsData {
     NetworkSettings network;
+    InfluxDBCollectorSettings influxDB;
     FlapSettings flap1Settings;
     FlapSettings flap2Settings;
 };
